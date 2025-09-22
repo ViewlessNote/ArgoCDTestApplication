@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Bubbels-deployment
+  name: frontend-deployment
 spec:
   replicas: 3
   selector:
@@ -18,13 +18,12 @@ spec:
         image: frontend:latest
         ports:
         - containerPort: 4200
-        resources:
 ---
 # Bubbels-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: Bubbels-service
+  name: frontend-service
 spec:
   type: NodePort
   selector:
@@ -38,7 +37,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Bubbels-deployment
+  name: backend-deployment
 spec:
   replicas: 3
   selector:
@@ -54,13 +53,12 @@ spec:
         image: backend:latest
         ports:
         - containerPort: 4200
-        resources:
 ---
 # Bubbels-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: Bubbels-service
+  name: backend-service
 spec:
   type: NodePort
   selector:
