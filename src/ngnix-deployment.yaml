@@ -52,7 +52,7 @@ spec:
       - name: go
         image: backend:1
         ports:
-        - containerPort: 4200
+        - containerPort: 8080
 ---
 # Bubbels-service.yaml
 apiVersion: v1
@@ -64,6 +64,6 @@ spec:
   selector:
     app: Bubbels
   ports:
-    - port: 4200
-      targetPort: 4200
+    - port: 8080
+      targetPort: 8080
       nodePort: 30081  # Port auf deinem Rechner
