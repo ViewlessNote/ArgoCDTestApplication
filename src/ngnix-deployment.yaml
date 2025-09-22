@@ -7,7 +7,7 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: Bubbels
+      app: angular
   template:
     metadata:
       labels:
