@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: angular
+        app: Bubbels
     spec:
       containers:
       - name: angular
