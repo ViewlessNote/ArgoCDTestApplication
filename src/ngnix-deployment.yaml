@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: angular
-        image: frontend
+        image: frontend:1
         ports:
         - containerPort: 8080
 ---
@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: go
-        image: backend
+        image: backend:1
         ports:
         - containerPort: 4200
 ---
