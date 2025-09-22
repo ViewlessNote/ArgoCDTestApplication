@@ -17,7 +17,7 @@ spec:
       - name: angular
         image: frontend:latest
         ports:
-        - containerPort: 4200
+        - containerPort: 8080
 ---
 # Bubbels-service.yaml
 apiVersion: v1
@@ -66,4 +66,4 @@ spec:
   ports:
     - port: 4200
       targetPort: 4200
-      nodePort: 30080  # Port auf deinem Rechner
+      nodePort: 30081  # Port auf deinem Rechner
