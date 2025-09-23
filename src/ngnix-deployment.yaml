@@ -156,10 +156,3 @@ spec:
             name: frontend
             port:
               number: 4200
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: backend
-            port:
-              number: 8080
