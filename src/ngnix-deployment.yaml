@@ -136,3 +136,10 @@ spec:
             name: frontend-deployment
             port:
               number: 4200
+      - path: /car_server.v1.CarService
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-deployment
+            port:
+              number: 8080
