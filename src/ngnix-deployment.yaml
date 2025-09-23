@@ -38,7 +38,7 @@ spec:
       - name: backend
         image: backend:1
         ports:
-        - containerPort: 8080
+        - containerPort: 80
 ---
 # Frontend Service
 apiVersion: v1
