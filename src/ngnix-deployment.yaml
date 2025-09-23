@@ -147,7 +147,7 @@ spec:
   ingressClassName: nginx   
   rules:
   - host: b.local.shopware.beer
-  - http:
+    http:
       paths:
       - pathType: Prefix
         path: /
