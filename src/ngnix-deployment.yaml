@@ -39,30 +39,32 @@ spec:
         image: backend:1
         ports:
         - containerPort: 8080
-
 ---
+# Frontend Service
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend
 spec:
-  ingressClassName: bubbels
-  ports:
-  - port: 4200
   selector:
     app: frontend
+  ports:
+  - port: 4200
+    targetPort: 4200
 ---
+# Backend Service
 apiVersion: v1
 kind: Service
 metadata:
   name: backend
 spec:
-  ingressClassName: bubbels
-  ports:
-  - port: 8080
   selector:
     app: backend
+  ports:
+  - port: 8080
+    targetPort: 8080
 ---
+# MySQL Service
 apiVersion: v1
 kind: Service
 metadata:
@@ -74,6 +76,7 @@ spec:
     app: mysql
   clusterIP: None
 ---
+# MySQL Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -105,9 +108,8 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
-          
 ---
-
+# Persistent Volume
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -123,6 +125,7 @@ spec:
   hostPath:
     path: "/mnt/data"
 ---
+# Persistent Volume Claim
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -134,9 +137,8 @@ spec:
   resources:
     requests:
       storage: 20Gi
-
 ---
-
+# Ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -152,13 +154,13 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: frontend-deployment
+            name: frontend
             port:
               number: 4200
       - path: /car_server.v1.CarService
         pathType: Prefix
         backend:
           service:
-            name: backend-deployment
+            name: backend
             port:
               number: 8080
