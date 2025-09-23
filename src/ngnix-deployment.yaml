@@ -146,7 +146,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: bubbels
+  ingressClassName: nginx
   rules:
   - http:
       paths:
