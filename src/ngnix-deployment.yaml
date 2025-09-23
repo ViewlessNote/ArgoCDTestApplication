@@ -155,7 +155,7 @@ spec:
             port:
               number: 4200
       - pathType: Prefix
-        path: /api
+        path: /car_server.v1.CarService
         backend:
           service:
             name: backend
