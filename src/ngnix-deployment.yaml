@@ -147,7 +147,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: localhost
+  - host: bubbels.local.shopware.beer
     http:
       paths:
       - path: /
