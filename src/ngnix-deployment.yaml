@@ -38,7 +38,7 @@ spec:
       - name: backend
         image: backend:1
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 ---
 # Frontend Service
 apiVersion: v1
@@ -50,7 +50,7 @@ spec:
     app: frontend
   ports:
   - port: 80
-    targetPort: 4200
+    targetPort: 80
 ---
 # Backend Service
 apiVersion: v1
@@ -155,11 +155,11 @@ spec:
           service:
             name: frontend
             port:
-              number: 4200
+              number: 80
       - pathType: Prefix
         path: /api/
         backend:
           service:
             name: backend
             port:
-              number: 80
+              number: 8080
