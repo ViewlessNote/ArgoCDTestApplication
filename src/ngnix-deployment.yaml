@@ -145,7 +145,7 @@ metadata:
   name: my-example
 spec:
   rules:
-  - host: local.shopware.beer
+  - host: localhost
     http:
       paths:
       - path: /
