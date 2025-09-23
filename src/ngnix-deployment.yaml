@@ -144,8 +144,8 @@ kind: Ingress
 metadata:
   name: example-ingress
 spec:
-  host: b.local.shopware.beer
   rules:
+  - host: bubbels.local.shopware.beer
   - http:
       paths:
       - pathType: Prefix
