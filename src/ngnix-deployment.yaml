@@ -147,7 +147,6 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
-  host: .local.shopware.beer
   rules:
   - http:
       paths:
