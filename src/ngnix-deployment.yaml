@@ -122,7 +122,7 @@ metadata:
   name: ingress-f-b
 spec:
   rules:
-  - host: "0.0.0.0"
+  - host: "frontend"
     http:
       paths:
       - pathType: Prefix
