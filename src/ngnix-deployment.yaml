@@ -68,10 +68,11 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: mysql:9
+      - image: mysql
         name: mysql
         env:
-          MYSQL_ROOT_PASSWORD: secret
+        - name: MYSQL_ROOT_PASSWORD
+          value: secret
         ports:
         - containerPort: 3306
           name: mysql
