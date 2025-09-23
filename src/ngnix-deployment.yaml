@@ -4,7 +4,6 @@ kind: Deployment
 metadata:
   name: frontend-deployment
 spec:
-  ingressClassName: bubbels
   replicas: 3
   selector:
     matchLabels:
@@ -26,7 +25,6 @@ kind: Deployment
 metadata:
   name: backend-deployment
 spec:
-  ingressClassName: bubbels
   replicas: 1
   selector:
     matchLabels:
@@ -43,12 +41,33 @@ spec:
         - containerPort: 8080
 
 ---
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  ports:
+  - port: 4200
+  selector:
+    app: frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  ingressClassName: bubbels
+  ports:
+  - port: 8080
+  selector:
+    app: backend
+---
 apiVersion: v1
 kind: Service
 metadata:
   name: mysql
 spec:
+  ingressClassName: bubbels
   ports:
   - port: 3306
   selector:
