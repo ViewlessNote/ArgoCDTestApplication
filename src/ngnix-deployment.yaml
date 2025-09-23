@@ -19,20 +19,6 @@ spec:
         ports:
         - containerPort: 4200
 ---
-# Frontend Service
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service
-spec:
-  type: NodePort
-  selector:
-    app: frontend
-  ports:
-    - port: 4200
-      targetPort: 4200
-      nodePort: 30080
----
 # Backend Deployment
 apiVersion: apps/v1
 kind: Deployment
@@ -53,20 +39,6 @@ spec:
         image: backend:1
         ports:
         - containerPort: 8080
----
-# Backend Service
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend
-spec:
-  selector:
-    app: backend
-  ports:
-    - port: 8080
-      targetPort: 8080
-
-
 ---
 
 apiVersion: v1
@@ -141,3 +113,22 @@ spec:
   resources:
     requests:
       storage: 20Gi
+      
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingressFB
+spec:
+  rules:
+  - host: "0.0.0.0"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
