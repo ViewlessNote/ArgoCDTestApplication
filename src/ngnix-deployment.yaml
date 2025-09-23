@@ -17,7 +17,7 @@ spec:
       - name: angular
         image: frontend:1
         ports:
-        - containerPort: 4200
+        - containerPort: 80
 ---
 # Backend Deployment
 apiVersion: apps/v1
@@ -49,7 +49,7 @@ spec:
   selector:
     app: frontend
   ports:
-  - port: 4200
+  - port: 80
     targetPort: 4200
 ---
 # Backend Service
