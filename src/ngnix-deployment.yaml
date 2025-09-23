@@ -39,6 +39,7 @@ spec:
         image: backend:1
         ports:
         - containerPort: 8080
+        
 ---
 
 apiVersion: v1
