@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: frontend-deployment
 spec:
+  ingressClassName: bubbels
   replicas: 3
   selector:
     matchLabels:
@@ -25,6 +26,7 @@ kind: Deployment
 metadata:
   name: backend-deployment
 spec:
+  ingressClassName: bubbels
   replicas: 1
   selector:
     matchLabels:
@@ -123,7 +125,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: hope
+  ingressClassName: bubbels
   rules:
   - http:
       paths:
