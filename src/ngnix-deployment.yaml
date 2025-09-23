@@ -127,7 +127,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: http://localhost/frontend
+      - path: localhost/frontend
         pathType: Prefix
         backend:
           service:
