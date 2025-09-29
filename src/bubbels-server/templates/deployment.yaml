@@ -59,7 +59,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "bubbels-server.fullname" . }}-mysql
+  name: mysql
   labels:
   {{- include "bubbels-server.labels" . | nindent 4 }}
 spec:
