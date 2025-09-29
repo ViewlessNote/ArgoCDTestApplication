@@ -24,6 +24,7 @@ kubernetesClusterDomain: cluster.local
 mysql:
   mysql:
     env:
+      mysqlDatabase: Garage
       mysqlRootPassword: secret
     image:
       repository: mysql

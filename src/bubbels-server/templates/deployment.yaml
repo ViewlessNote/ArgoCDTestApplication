@@ -79,6 +79,8 @@ spec:
       - env:
         - name: MYSQL_ROOT_PASSWORD
           value: {{ quote .Values.mysql.mysql.env.mysqlRootPassword }}
+        - name: MYSQL_DATABASE
+          value: {{ quote .Values.mysql.mysql.env.mysqlDatabase }}
         - name: KUBERNETES_CLUSTER_DOMAIN
           value: {{ quote .Values.kubernetesClusterDomain }}
         image: {{ .Values.mysql.mysql.image.repository }}:{{ .Values.mysql.mysql.image.tag

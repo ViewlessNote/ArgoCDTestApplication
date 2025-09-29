@@ -98,6 +98,8 @@ spec:
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: secret
+        - name: MYSQL_DATABASE
+          value: Garage
         ports:
         - containerPort: 3306
           name: mysql
