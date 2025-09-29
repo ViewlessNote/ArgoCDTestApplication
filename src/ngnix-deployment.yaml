@@ -93,7 +93,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: mysql
+      - image: mysql:9
         name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD

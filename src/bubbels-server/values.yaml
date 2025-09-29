@@ -27,7 +27,7 @@ mysql:
       mysqlRootPassword: secret
     image:
       repository: mysql
-      tag: "8.0"
+      tag: "9"
   ports:
   - port: 3306
     targetPort: 0
