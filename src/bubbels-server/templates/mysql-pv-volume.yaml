@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "bubbels-server.fullname" . }}-mysql-pv-volume
+  labels:
+    type: local
+  {{- include "bubbels-server.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 20Gi
+  hostPath:
+    path: /mnt/data
+  storageClassName: manual

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "bubbels-server.fullname" . }}-backend
+  labels:
+  {{- include "bubbels-server.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.backend.type }}
+  selector:
+    app: backend
+    {{- include "bubbels-server.selectorLabels" . | nindent 4 }}
+  ports:
+  {{- .Values.backend.ports | toYaml | nindent 2 }}

@@ -1,0 +1,40 @@
+backend:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  type: ClusterIP
+backendDeployment:
+  backend:
+    image:
+      repository: backend
+      tag: "1"
+  replicas: 1
+frontend:
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+frontendDeployment:
+  angular:
+    image:
+      repository: frontend
+      tag: "1"
+  replicas: 3
+kubernetesClusterDomain: cluster.local
+mysql:
+  mysql:
+    env:
+      mysqlRootPassword: secret
+    image:
+      repository: mysql
+      tag: "8.0"
+  ports:
+  - port: 3306
+    targetPort: 0
+  strategy:
+    type: Recreate
+  type: ClusterIP
+pvc:
+  mysqlPvClaim:
+    storageClass: manual
+    storageRequest: 20Gi
