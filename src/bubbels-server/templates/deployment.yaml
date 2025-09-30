@@ -61,7 +61,7 @@ spec:
         name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: secret
+          value: {{.Values.mysql.PW}}
         ports:
         - containerPort: {{.Values.mysql.ports.inContainerPort}}
           name: mysql

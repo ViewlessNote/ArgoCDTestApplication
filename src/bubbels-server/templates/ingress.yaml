@@ -5,6 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx   
   rules:
+  {{if .Values.frontendDeployment.ingressEnabled}}
   - host: {{.Values.frontendDeployment.url}}
     http:
       paths:
@@ -15,6 +16,8 @@ spec:
             name: frontend
             port:
               number: {{.Values.frontendDeployment.ports.outContainerPort}}
+  {{- end}}
+  {{if .Values.backendDeployment.ingressEnabled}}
   - host: {{.Values.backendDeployment.url}}
     http:
       paths:
@@ -25,3 +28,4 @@ spec:
             name: backend
             port:
               number: {{.Values.backendDeployment.ports.outContainerPort}}
+  {{- end}}
