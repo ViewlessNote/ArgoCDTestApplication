@@ -1,13 +1,11 @@
+# Frontend Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "bubbels-server.fullname" . }}-frontend
-  labels:
-  {{- include "bubbels-server.labels" . | nindent 4 }}
+  name: frontend
 spec:
-  type: {{ .Values.frontend.type }}
   selector:
     app: frontend
-    {{- include "bubbels-server.selectorLabels" . | nindent 4 }}
   ports:
-  {{- .Values.frontend.ports | toYaml | nindent 2 }}
+  - port: {{.Values.service.frontend.port}}
+    targetPort: {{.Values.service.frontend.port}}

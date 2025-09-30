@@ -1,99 +1,103 @@
+# Frontend Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "bubbels-server.fullname" . }}-frontend-deployment
-  labels:
-  {{- include "bubbels-server.labels" . | nindent 4 }}
+  name: frontend-deployment
 spec:
-  replicas: {{ .Values.frontendDeployment.replicas }}
+  replicas: 3
   selector:
     matchLabels:
       app: frontend
-    {{- include "bubbels-server.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
         app: frontend
-      {{- include "bubbels-server.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - env:
-        - name: KUBERNETES_CLUSTER_DOMAIN
-          value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.frontendDeployment.angular.image.repository }}:{{ .Values.frontendDeployment.angular.image.tag
-          | default .Chart.AppVersion }}
-        name: angular
+      - name: angular
+        image: frontend:1
         ports:
         - containerPort: 80
-        resources: {}
 ---
+# Backend Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "bubbels-server.fullname" . }}-backend-deployment
-  labels:
-  {{- include "bubbels-server.labels" . | nindent 4 }}
+  name: backend-deployment
 spec:
-  replicas: {{ .Values.backendDeployment.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       app: backend
-    {{- include "bubbels-server.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
         app: backend
-      {{- include "bubbels-server.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - env:
-        - name: KUBERNETES_CLUSTER_DOMAIN
-          value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.backendDeployment.backend.image.repository }}:{{ .Values.backendDeployment.backend.image.tag
-          | default .Chart.AppVersion }}
-        name: backend
+      - name: backend
+        image: {{.Values.image.frontendRepository}}{{.Values.image.tag}}
         ports:
-        - containerPort: 8080
-        resources: {}
+        - containerPort: {{.Values.service.backend.port}}
 ---
+# MySQL Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
-  labels:
-  {{- include "bubbels-server.labels" . | nindent 4 }}
 spec:
-  strategy:
-    type: {{ .Values.mysql.strategy.type | quote }}
   selector:
     matchLabels:
       app: mysql
-    {{- include "bubbels-server.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: mysql
-      {{- include "bubbels-server.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: {{ quote .Values.mysql.mysql.env.mysqlRootPassword }}
-        - name: MYSQL_DATABASE
-          value: {{ quote .Values.mysql.mysql.env.mysqlDatabase }}
-        - name: KUBERNETES_CLUSTER_DOMAIN
-          value: {{ quote .Values.kubernetesClusterDomain }}
-        image: {{ .Values.mysql.mysql.image.repository }}:{{ .Values.mysql.mysql.image.tag
-          | default .Chart.AppVersion }}
+      - image: mysql
         name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: secret
         ports:
-        - containerPort: 3306
+        - containerPort: {{.Values.mysql.ports.inContainerPort}}
           name: mysql
-        resources: {}
         volumeMounts:
-        - mountPath: /var/lib/mysql
-          name: mysql-persistent-storage
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: {{ include "bubbels-server.fullname" . }}-mysql-pv-claim
+          claimName: mysql-pv-claim
+---
+# Persistent Volume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{.Values.mysql.persistentVolumeClaim.StorageSice}}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+# Persistent Volume Claim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{.Values.mysql.persistentVolumeClaim.StorageSice}}

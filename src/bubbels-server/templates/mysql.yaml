@@ -1,13 +1,11 @@
+# MySQL Service
 apiVersion: v1
 kind: Service
 metadata:
   name: mysql
-  labels:
-  {{- include "bubbels-server.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.mysql.type }}
+  ports:
+  - port: {{.Values.mysql.ports.inContainerPort}}
   selector:
     app: mysql
-    {{- include "bubbels-server.selectorLabels" . | nindent 4 }}
-  ports:
-  {{- .Values.mysql.ports | toYaml | nindent 2 }}
+  clusterIP: None

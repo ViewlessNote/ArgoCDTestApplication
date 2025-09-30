@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "bubbels-server.name" -}}
+{{- define "bubbels.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "bubbels-server.fullname" -}}
+{{- define "bubbels.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "bubbels-server.chart" -}}
+{{- define "bubbels.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "bubbels-server.labels" -}}
-helm.sh/chart: {{ include "bubbels-server.chart" . }}
-{{ include "bubbels-server.selectorLabels" . }}
+{{- define "bubbels.labels" -}}
+helm.sh/chart: {{ include "bubbels.chart" . }}
+{{ include "bubbels.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "bubbels-server.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "bubbels-server.name" . }}
+{{- define "bubbels.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "bubbels.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "bubbels-server.serviceAccountName" -}}
+{{- define "bubbels.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "bubbels-server.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "bubbels.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

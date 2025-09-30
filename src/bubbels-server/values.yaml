@@ -1,41 +1,27 @@
-backend:
-  ports:
-  - port: 8080
-    targetPort: 8080
-  type: ClusterIP
-backendDeployment:
-  backend:
-    image:
-      repository: backend
-      tag: "1"
-  replicas: 1
-frontend:
-  ports:
-  - port: 80
-    targetPort: 80
-  type: ClusterIP
 frontendDeployment:
-  angular:
-    image:
-      repository: frontend
-      tag: "1"
-  replicas: 3
-kubernetesClusterDomain: cluster.local
-mysql:
-  mysql:
-    env:
-      mysqlDatabase: Garage
-      mysqlRootPassword: secret
-    image:
-      repository: mysql
-      tag: "9"
+  url: b.local.shopware.beer
+  image:
+    name: frontend
+    tag: 1
   ports:
-  - port: 3306
-    targetPort: 0
-  strategy:
-    type: Recreate
-  type: ClusterIP
-pvc:
-  mysqlPvClaim:
-    storageClass: manual
-    storageRequest: 20Gi
+    inContainerPort: 8080
+    outContainerPort: 8080
+
+backendDeployment:
+  url: api.local.shopware.beer
+  image:
+    name: backend
+    tag: 1
+    ports:
+      inContainerPort: 80
+      outContainerPort: 80
+
+mysql:
+  image:
+    name: mysql
+    tag: 9
+  ports:
+    inContainerPort: 3306
+    outContainerPort: 3306
+  persistentVolumeClaim:
+    StorageSice: 20Gi
