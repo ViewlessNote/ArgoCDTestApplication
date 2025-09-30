@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: angular
-        image: frontend:1
+        image: {{.Values.frontendDeployment.image.name}}{{.Values.image.tag}}
         ports:
         - containerPort: {{.Values.frontendDeployment.ports.inContainerPort}}
 ---
@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: {{.Values.image.frontendRepository}}{{.Values.image.tag}}
+        image: {{.Values.backendDeployment.image.name}}{{.Values.image.tag}}
         ports:
         - containerPort: {{.Values.backendDeployment.ports.inContainerPort}}
 ---
