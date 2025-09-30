@@ -7,5 +7,5 @@ spec:
   selector:
     app: frontend
   ports:
-  - port: 80
-    targetPort: {{.Values.service.frontendDeployment.ports.outContainerPort}}
+  - port: {{.Values.backendDeployment.ports.inContainerPort}}
+    targetPort: {{.Values.backendDeployment.ports.outContainerPort}}
