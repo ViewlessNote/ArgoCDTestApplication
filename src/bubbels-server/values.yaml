@@ -1,4 +1,5 @@
 frontendDeployment:
+  replicas: 1
   url: b.local.shopware.beer
   image:
     name: frontend
@@ -8,6 +9,7 @@ frontendDeployment:
    outContainerPort: 80
 
 backendDeployment:
+  replicas: 1
   url: api.local.shopware.beer
   image:
     name: backend
