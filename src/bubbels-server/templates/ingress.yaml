@@ -24,4 +24,4 @@ spec:
           service:
             name: backend
             port:
-              number: {{.Values.backendDeployment.ports.outContainerPort}}
+              number: 8080
