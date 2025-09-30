@@ -4,8 +4,8 @@ frontendDeployment:
     name: frontend
     tag: 1
   ports:
-    inContainerPort: 8080
-    outContainerPort: 8080
+    inContainerPort: 80
+    outContainerPort: 80
 
 backendDeployment:
   url: api.local.shopware.beer
@@ -13,8 +13,8 @@ backendDeployment:
     name: backend
     tag: 1
     ports:
-      inContainerPort: 80
-      outContainerPort: 80
+      inContainerPort: 8080
+      outContainerPort: 8080
 
 mysql:
   image:
