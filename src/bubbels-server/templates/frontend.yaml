@@ -1,4 +1,5 @@
 # Frontend Service
+{{if .Values.frontendDeployment.ingressEnabled}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,3 +10,4 @@ spec:
   ports:
   - port: {{.Values.frontendDeployment.ports.inContainerPort}}
     targetPort: {{.Values.frontendDeployment.ports.outContainerPort}}
+{{- end}}
