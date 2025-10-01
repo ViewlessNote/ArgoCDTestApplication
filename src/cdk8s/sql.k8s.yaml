@@ -53,7 +53,7 @@ metadata:
   name: sql-mysqlpvclaim-c8317456
 spec:
   accessModes:
-    - manuel
+    - ReadWriteOnce
   resources:
     requests:
       capacity: 20
