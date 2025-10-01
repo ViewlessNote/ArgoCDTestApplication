@@ -1,0 +1,32 @@
+frontendDeployment:
+  replicas: 1
+  url: b.local.shopware.beer
+  image:
+    name: frontend
+    tag: 1
+  ports:
+   inContainerPort: 80
+   outContainerPort: 80
+  ingressEnabled: true
+
+backendDeployment:
+  replicas: 1
+  url: api.local.shopware.beer
+  image:
+    name: backend
+    tag: 1
+  ports:
+     inContainerPort: 8080
+     outContainerPort: 8080
+  ingressEnabled: true
+
+mysql:
+  PW: secrets
+  image:
+    name: mysql
+    tag: 9
+  ports:
+    inContainerPort: 3306
+    outContainerPort: 3306
+  persistentVolumeClaim:
+    StorageSice: 20Gi
