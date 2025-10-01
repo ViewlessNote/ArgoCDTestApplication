@@ -24,7 +24,6 @@ metadata:
   name: backend-service-c8cd0a8c
 spec:
   ports:
-    - nodePort: 8080
-      port: 8080
+    - port: 8080
   selector:
     app: backend

@@ -24,7 +24,6 @@ metadata:
   name: frontend-service-c809d60e
 spec:
   ports:
-    - nodePort: 80
-      port: 80
+    - port: 80
   selector:
     app: frontend
