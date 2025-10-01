@@ -52,9 +52,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: sql-mysqlpvclaim-c8317456
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 20Gi
-  storageClassName: manual
