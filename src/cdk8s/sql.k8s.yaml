@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-deployment-c8b5eff9
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-sql
+  template:
+    metadata:
+      labels:
+        app: my-sql
+    spec:
+      containers:
+        - image: MySQL:9
+          name: my-sql
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-persistent-storage
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sql-mysql-service-c8f13960
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: my-sql
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sql-mysql-pv-c8ddef85
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    Quantity: 20Gig
+  hostPath:
+    path: /mnt/data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sql-mysql-pv-claim-c83eec7d
+spec:
+  accessModes:
+    - manuel
+  resources:
+    requests:
+      capacity: '"20Gig"'
+  storageClassName: manuel
