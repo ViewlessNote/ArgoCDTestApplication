@@ -56,5 +56,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      capacity: 20Gi
+      storage: 20Gi
   storageClassName: manuel
