@@ -40,6 +40,7 @@ kind: PersistentVolume
 metadata:
   name: sql-mysqlpv-c88da25d
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   capacity:
