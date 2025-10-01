@@ -38,7 +38,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: sql-mysql-pv-c8ddef85
+  name: sql-mysqlpv-c88da25d
 spec:
   accessModes:
     - ReadWriteOnce
@@ -50,7 +50,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sql-mysql-pv-claim-c83eec7d
+  name: sql-mysqlpvclaim-c8317456
 spec:
   accessModes:
     - manuel
