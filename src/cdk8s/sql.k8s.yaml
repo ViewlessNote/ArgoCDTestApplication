@@ -40,22 +40,22 @@ kind: PersistentVolume
 metadata:
   name: sql-mysqlpv-c88da25d
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   capacity:
     storage: 20Gi
   hostPath:
     path: /mnt/data
+  storageClassName: manual
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sql-mysqlpvclaim-c8317456
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 20Gi
+  storageClassName: manual
