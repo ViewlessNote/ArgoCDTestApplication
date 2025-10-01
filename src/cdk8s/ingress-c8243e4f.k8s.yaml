@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-c8549c29
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: b.local.shopware.beer
+      http:
+        paths:
+          - backend:
+              service:
+                name: frontend
+                port:
+                  name: frontend
+                  number: 80
+            path: /
+            pathType: Prefix
+    - host: api.local.shopware.beer
+      http:
+        paths:
+          - backend:
+              service:
+                name: backend
+                port:
+                  name: backend
+                  number: 8080
+            path: /
+            pathType: Prefix
