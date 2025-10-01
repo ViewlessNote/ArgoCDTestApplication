@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-sql
+      app: mysql
   template:
     metadata:
       labels:
-        app: my-sql
+        app: mysql
     spec:
       containers:
         - image: mysql:9
-          name: my-sql
+          name: mysql
           ports:
             - containerPort: 3306
           volumeMounts:
@@ -33,7 +33,7 @@ spec:
   ports:
     - port: 3306
   selector:
-    app: my-sql
+    app: mysql
 ---
 apiVersion: v1
 kind: PersistentVolume
