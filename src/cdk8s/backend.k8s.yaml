@@ -21,7 +21,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service-c8cd0a8c
+  name: frontend-service
 spec:
   ports:
     - port: 8080

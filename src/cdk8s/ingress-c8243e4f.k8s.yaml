@@ -10,7 +10,7 @@ spec:
         paths:
           - backend:
               service:
-                name: frontend
+                name: frontend-service
                 port:
                   number: 80
             path: /
@@ -20,7 +20,7 @@ spec:
         paths:
           - backend:
               service:
-                name: backend
+                name: backend-service
                 port:
                   number: 8080
             path: /
