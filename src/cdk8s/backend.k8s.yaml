@@ -24,6 +24,7 @@ metadata:
   name: backend-service
 spec:
   ports:
-    - targetPort: 8080
+    - port: 8080
+      targetPort: 8080
   selector:
     app: backend-service
