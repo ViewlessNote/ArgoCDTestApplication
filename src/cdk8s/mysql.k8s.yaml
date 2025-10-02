@@ -49,7 +49,12 @@ spec:
         app: mysql
     spec:
       containers:
-        - image: mysql:9
+        - env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: secrets
+            - name: MYSQL_DATABASE
+              value: Garage
+          image: mysql:9
           name: mysql
           ports:
             - containerPort: 3306
